@@ -1,0 +1,279 @@
+question_id,prompt_version,model,start_time,end_time,latency_seconds,status,input_tokens,output_tokens,total_tokens,input_cost_usd,output_cost_usd,total_cost_usd,valid_json,response
+Q1,v1,gemini-3.5-flash-lite,2026-10-30T17:20:13.389,2026-10-30T17:20:16.236,2.846,success,24,607,631,7.2e-06,0.0015175,0.0015247,False,"Here is a clear and simple explanation of **overfitting** and how to prevent it.
+
+---
+
+### **What is Overfitting?**
+
+**Overfitting** happens when a machine learning model learns the training data *too well*. Instead of learning the general patterns, it memorizes the specific details, including the **noise** (random errors or irrelevant fluctuations) and outliers in the data.
+
+*   **The Analogy:** Imagine a student who memorizes the exact answers to a specific practice test rather than understanding the underlying math concepts. When they take the real test and see slightly different questions, they fail because they can't adapt.
+*   **The Result:** An overfitted model has **high accuracy on training data**, but **poor performance on new, unseen data** (test data or real-world data). It lacks *generalization*.
+
+---
+
+### **How Can Overfitting Be Prevented?**
+
+Data scientists use several techniques to stop a model from memorizing and help it learn actual patterns:
+
+#### **1. Use More Training Data**
+The easiest way to prevent overfitting is to feed the model more data. The more diverse examples the model sees, the harder it is to memorize them, forcing it to learn the general rules instead.
+
+#### **2. Train-Test Split (Cross-Validation)**
+Always split your data into a **training set** and a **testing (or validation) set**. 
+* Train the model on the training set.
+* Evaluate it on the testing set, which the model has never seen before. 
+* If the training accuracy is 99% but the testing accuracy is 60%, you know it is overfitting.
+
+#### **3. Regularization (L1 and L2)**
+Regularization adds a ""penalty"" to the model if it becomes too complex. 
+* It discourages the model from assigning too much importance to any single feature or creating overly complicated curves, keeping the model simpler and more generalized.
+
+#### **4. Early Stopping**
+When training an iterative model (like a Neural Network), the model's accuracy on the validation data improves up to a certain point, and then it starts to get worse as it begins to overfit. **Early stopping** means monitoring the validation error during training and halting the process the moment it starts to increase.
+
+#### **5. Dropout (for Neural Networks)**
+During training, ""dropout"" randomly ignores (turns off) a percentage of neurons in a neural network. This prevents the network from relying too heavily on any specific path or feature, forcing all parts of the network to learn robust patterns.
+
+#### **6. Simplify the Model**
+If a problem is simple, don't use a massively complex model (e.g., don't use a deep neural network to predict house prices based on just two variables). Choosing a simpler model with fewer parameters naturally prevents it from finding overly complex, fake patterns."
+Q2,v1,gemini-3.5-flash-lite,2026-10-30T17:20:16.236,2026-10-30T17:20:18.502,2.266,success,20,496,516,6e-06,0.00124,0.001246,False,"Here is a clear and simple explanation of the difference between supervised and unsupervised learning:
+
+### 1. Supervised Learning
+* **Analogy:** Learning with a teacher or an answer key.
+* **Definition:** The algorithm is trained on **labeled data**. This means that every input data point comes with the correct output (the ""answer""). 
+* **How it works:** The model learns the relationship between the inputs and the outputs. Once it is trained, you can give it new, unseen data, and it will predict the correct outcome based on what it learned.
+* **Common Tasks:**
+  * **Classification:** Predicting a category (e.g., Is this email ""Spam"" or ""Not Spam""?).
+  * **Regression:** Predicting a continuous number (e.g., What will the price of a house be based on its size?).
+* **Examples:** Facial recognition, predicting weather temperature, medical diagnosis.
+
+---
+
+### 2. Unsupervised Learning
+* **Analogy:** Learning on your own without a teacher or answer key.
+* **Definition:** The algorithm is trained on **unlabeled data**. The data has no predefined answers or outcomes.
+* **How it works:** The model is left to explore the data on its own to find hidden patterns, similarities, structures, or groupings. 
+* **Common Tasks:**
+  * **Clustering:** Grouping similar data points together (e.g., segmenting customers into different buying habits).
+  * **Association:** Finding rules that describe large portions of data (e.g., people who buy diapers also tend to buy baby wipes).
+  * **Dimensionality Reduction:** Simplifying data without losing important information.
+* **Examples:** Customer segmentation for marketing, recommendation systems (like Netflix suggesting shows), anomaly detection (like spotting credit card fraud).
+
+---
+
+### Summary Table
+
+| Feature | Supervised Learning | Unsupervised Learning |
+| :--- | :--- | :--- |
+| **Data Type** | Labeled data (has answers) | Unlabeled data (no answers) |
+| **Teacher/Guide** | Yes (guided by correct outputs) | No (self-discovery) |
+| **Main Goal** | Prediction and forecasting | Finding hidden patterns and structures |
+| **Complexity** | Generally easier to evaluate accuracy | Harder to evaluate accuracy (no ""right"" answer) |"
+Q3,v1,gemini-3.5-flash-lite,2026-10-30T17:20:18.502,2026-10-30T17:20:20.536,2.034,success,22,555,577,6.5999999999999995e-06,0.0013875,0.0013941000000000001,False,"The time complexity of binary search is **$O(\log n)$** (logarithmic time), where $n$ is the number of elements in the sorted array. 
+
+Here is why:
+
+### 1. How Binary Search Works
+Binary search is a divide-and-conquer algorithm. To find a target value in a **sorted** array, it follows these steps:
+1. Look at the middle element of the array.
+2. If the target matches the middle element, the search is finished.
+3. If the target is *less* than the middle element, discard the right half of the array and repeat the process on the left half.
+4. If the target is *greater* than the middle element, discard the left half of the array and repeat the process on the right half.
+
+### 2. The Mathematical Explanation
+Every time you compare the target to the middle element, **you cut the remaining search space in half**. 
+
+Let’s trace the number of elements left after each step, starting with $n$ elements:
+* **Start (0 steps):** $n$ elements
+* **Step 1:** $\frac{n}{2}$ elements remaining
+* **Step 2:** $\frac{n}{4}$ elements remaining (which is $\frac{n}{2^2}$)
+* **Step 3:** $\frac{n}{8}$ elements remaining (which is $\frac{n}{2^3}$)
+* **...**
+* **Step $k$:** $\frac{n}{2^k}$ elements remaining
+
+The search ends when you are left with just **1 element** (or zero, if the item isn't there). Therefore, we can set up the equation for the maximum number of steps ($k$):
+
+$$\frac{n}{2^k} = 1$$
+
+Multiply both sides by $2^k$:
+
+$$n = 2^k$$
+
+To solve for $k$ (the number of steps), we take the logarithm base 2 of both sides:
+
+$$k = \log_2(n)$$
+
+### Summary
+Because the number of steps required to find the worst-case element grows in proportion to the base-2 logarithm of the input size ($n$), the time complexity is **$O(\log n)$**. 
+
+*For comparison:* While a linear search has to check every single item one-by-one ($O(n)$), binary search can search a billion items in a maximum of just about 30 steps because $2^{30} \approx 1,000,000,000$."
+Q4,v1,gemini-3.5-flash-lite,2026-10-30T17:20:20.536,2026-10-30T17:20:22.295,1.759,success,24,317,341,7.2e-06,0.0007925,0.0007997,False,"In a relational database, the role of a **primary key** is to uniquely identify each individual record (row) in a table. 
+
+Think of it as the database equivalent of a fingerprint, a Social Security number, or a student ID number. 
+
+Here are its four main functions:
+
+1. **Uniqueness:** It ensures that no two rows in the same table have the exact same value in the primary key column. For example, two different customers cannot have the same `CustomerID`.
+2. **Entity Integrity (No Nulls):** A primary key column **cannot** contain `NULL` (empty) values. Every single row *must* have a valid, unique identifier.
+3. **Relationships (Foreign Keys):** Primary keys are used to connect different tables together. When a primary key from one table is placed into another table, it is called a **foreign key**. For example, a `CustomerID` (primary key in the Customers table) might appear in the Orders table as a foreign key to show which customer placed a specific order.
+4. **Fast Data Retrieval:** Databases automatically create an index on primary keys, which allows the database management system (DBMS) to search, update, and delete specific records much faster.
+
+### Rules for a Good Primary Key:
+* **Unique:** Never repeats.
+* **Unchanging:** Its value should rarely, if ever, change.
+* **Simple:** Often an auto-incrementing integer (1, 2, 3...) or a universally unique identifier (UUID)."
+Q5,v1,gemini-3.5-flash-lite,2026-10-30T17:20:22.295,2026-10-30T17:20:24.284,1.989,success,21,334,355,6.3e-06,0.000835,0.0008413,False,"Imagine you are standing blindfolded on the side of a steep, hilly mountain, and your goal is to walk down to the lowest point (the valley). Because you are blindfolded, you can't see the whole landscape. How do you get to the bottom?
+
+You would probably use this strategy:
+1. **Feel the ground:** Use your feet to feel which direction slopes downward the most steeply.
+2. **Take a step:** Take a small step in that direction.
+3. **Repeat:** Stop, feel the slope again, and take another step downhill. 
+4. **Stop:** Eventually, the ground feels flat beneath your feet. You realize you've reached the bottom, so you stop walking.
+
+In artificial intelligence and machine learning, **Gradient Descent** is the exact same process, but for a computer solving a math problem. 
+
+Here is how it translates:
+* **The Mountain:** Represents the computer's ""error"" or ""mistake"" score. The higher you are on the mountain, the worse the computer's guesses are. The bottom of the valley (elevation zero) represents the best possible accuracy.
+* **The Blindfolded Person:** Represents the machine learning algorithm.
+* **The Steps:** Represent the computer tweaking its settings (called ""weights"" or ""parameters"") to make better predictions.
+* **The Gradient:** Is just a fancy math word for ""the slope."" It tells the computer which direction is downhill and how steep it is.
+
+By taking repeated steps downhill, gradient descent helps a computer program learn from its mistakes until it makes as few errors as possible."
+Q1,v2,gemini-3.5-flash-lite,2026-10-30T17:20:27.619,2026-10-30T17:20:29.791,2.172,success,48,415,463,1.44e-05,0.0010375,0.0010519,False,"**What is Overfitting?**
+
+Overfitting is a common problem in machine learning where a model learns the training data *too well*. Instead of learning the general underlying patterns, the model memorizes the specific details, including the noise and random fluctuations in that exact dataset. 
+
+Because of this, the model performs exceptionally well on the training data, but it fails to generalize to new, unseen data (like a test dataset or real-world application). 
+
+---
+
+**How to Prevent Overfitting:**
+
+Here are the most common strategies used to prevent overfitting:
+
+1. **Use More Training Data:** 
+   Providing the model with more diverse training data helps it learn the true underlying patterns rather than getting distracted by noise.
+
+2. **Simplify the Model (Regularization):** 
+   Complex models (like deep neural networks with many parameters) are prone to overfitting. Techniques like L1 and L2 regularization add a penalty to the model for being overly complex, keeping the coefficients smaller and simpler.
+
+3. **Cross-Validation:** 
+   Instead of using a single train-test split, techniques like $k$-fold cross-validation divide the data into multiple subsets. This ensures the model is trained and tested on different parts of the data, giving a better estimate of how it will perform in the real world.
+
+4. **Early Stopping:** 
+   When training an iterative model (like a neural network), the model's performance on a validation set is monitored during each cycle (epoch). Training is stopped as soon as the validation error starts to increase, even if the training error is still decreasing.
+
+5. **Dropout (for Neural Networks):** 
+   During training, dropout randomly ""turns off"" a percentage of neurons in the network. This prevents the network from relying too heavily on any single neuron and forces it to learn more robust features.
+
+6. **Feature Selection:** 
+   Removing irrelevant or redundant inputs (features) from your dataset reduces the chances of the model learning meaningless relationships."
+Q2,v2,gemini-3.5-flash-lite,2026-10-30T17:20:29.791,2026-10-30T17:20:32.102,2.311,success,44,332,376,1.3199999999999999e-05,0.00083,0.0008432,False,"In machine learning, the main difference between supervised and unsupervised learning comes down to whether or not the training data includes **labels** (the correct answers).
+
+Here is the breakdown:
+
+*   **Supervised Learning**
+    *   **The Setup:** The algorithm is trained on a dataset that includes both the input data and the correct output (labels). 
+    *   **The Analogy:** It is like learning with a teacher who gives you practice problems along with an answer key, so you can check your work and correct your mistakes.
+    *   **Common Goal:** To predict outcomes for new, unseen data.
+    *   **Examples:** Predicting house prices based on historical data (regression), or classifying emails as ""spam"" or ""not spam"" (classification).
+
+*   **Unsupervised Learning**
+    *   **The Setup:** The algorithm is trained on data that has *no* labels or correct answers provided. The model must figure out the structure or patterns in the data on its own.
+    *   **The Analogy:** It is like being given a huge box of assorted Lego blocks and having to sort them by color or shape yourself, without anyone telling you what the categories should be.
+    *   **Common Goal:** To discover hidden patterns, similarities, or groupings within the data.
+    *   **Examples:** Customer segmentation for marketing (clustering), or grouping news articles by topic.
+
+**Summary:** 
+*   **Supervised** = Learning *with* a teacher (labeled data).
+*   **Unsupervised** = Learning by exploration (unlabeled data)."
+Q3,v2,gemini-3.5-flash-lite,2026-10-30T17:20:32.102,2026-10-30T17:20:34.075,1.973,success,46,269,315,1.38e-05,0.0006724999999999999,0.0006862999999999999,False,"The time complexity of binary search is **$O(\log n)$** (logarithmic time). 
+
+Here is why:
+
+1. **How it works:** Binary search only works on sorted lists. At every step, it looks at the middle element of the list. 
+2. **Eliminating half the data:** 
+   - If the target value is equal to the middle element, the search is finished.
+   - If the target is *smaller*, it throws away the entire right half of the list.
+   - If the target is *larger*, it throws away the entire left half of the list.
+3. **The math behind it:** Because the algorithm cuts the remaining search space in half with every single comparison, the number of steps required grows very slowly as the dataset ($n$) grows. 
+
+**Example:** 
+If you have a sorted list of **1,000** items, a linear search might take up to 1,000 steps. Binary search, however, will find the item in **at most 10 steps**, because $2^{10}$ is 1,024. If you double the dataset to 2,000 items, binary search only takes **1** more step (11 steps total)."
+Q4,v2,gemini-3.5-flash-lite,2026-10-30T17:20:34.075,2026-10-30T17:20:35.231,1.156,success,48,149,197,1.44e-05,0.0003725,0.0003869,False,"A **primary key** is a specific column (or set of columns) in a database table that uniquely identifies each row. 
+
+Its main roles are:
+
+1. **Ensures Uniqueness:** It guarantees that no two rows are identical. For example, in a `Students` table, the `StudentID` can be a primary key because no two students share the same ID.
+2. **Prevents Missing Data (Nulls):** A primary key cannot contain empty or `NULL` values; every row *must* have one.
+3. **Connects Tables (Relationships):** It acts as the main anchor when linking different tables together using **foreign keys**, helping to maintain organization and data integrity across the database."
+Q5,v2,gemini-3.5-flash-lite,2026-10-30T17:20:35.231,2026-10-30T17:20:37.354,2.123,success,45,377,422,1.3500000000000001e-05,0.0009425,0.0009559999999999999,False,"**Gradient descent** is a fundamental optimization algorithm used in machine learning and statistics. Its main job is to help a computer find the **best possible solution** to a problem by minimizing error. 
+
+Here is how to understand it using a simple analogy:
+
+Imagine you are blindfolded and dropped somewhere on the side of a steep mountain. Your goal is to get to the very bottom (the valley), where the elevation is lowest. 
+
+Since you are blindfolded, you can't see the bottom. However, you can feel the slope of the ground right beneath your feet. 
+
+To get to the bottom, you follow these steps:
+1. **Feel the slope:** Check which direction goes down most steeply.
+2. **Take a step:** Take a step in that downward direction.
+3. **Repeat:** Keep feeling the slope and taking steps until the ground feels flat. Once it's flat, you know you've reached the bottom.
+
+### How this applies to computers:
+* **The Mountain:** Represents the **error function** (a mathematical way of measuring how wrong a computer's predictions are). The peak is high error (very wrong), and the valley is zero error (very accurate).
+* **Your Position:** Represents the current settings (called *parameters* or *weights*) of the computer model.
+* **The Gradient:** Is just a mathematical term for the **slope** and the direction of the steepest descent.
+* **The Step Size (Learning Rate):** Dictates how big of a step you take. If your steps are too big, you might step right over the valley. If your steps are too small, it will take you forever to get down. 
+
+In short, gradient descent is simply a process of **taking repeated steps downhill** until you find the lowest possible error."
+Q1,v3,gemini-3.5-flash-lite,2026-10-30T17:20:41.658,2026-10-30T17:20:42.802,1.144,success,89,168,257,2.67e-05,0.00041999999999999996,0.00044669999999999996,True,"{
+  ""answer"": ""Overfitting occurs when a machine learning model learns the training data too well, including its noise and random fluctuations, which negatively impacts the model's performance on new, unseen data. It can be prevented by techniques such as using more training data, applying regularization (like L1 or L2), cross-validation, simplifying the model architecture, and early stopping during training."",
+  ""confidence"": ""high"",
+  ""key_points"": [
+    ""Model learns training data noise and specific details too well"",
+    ""Poor generalization to unseen test data"",
+    ""Prevented by regularization (L1/L2)"",
+    ""Prevented by cross-validation and early stopping"",
+    ""Mitigated by increasing the volume and diversity of training data""
+  ]
+}"
+Q2,v3,gemini-3.5-flash-lite,2026-10-30T17:20:42.802,2026-10-30T17:20:43.847,1.044,success,85,124,209,2.55e-05,0.00031,0.0003355,True,"{
+  ""answer"": ""Supervised learning uses labeled datasets to train algorithms to classify data or predict outcomes accurately, whereas unsupervised learning uses unlabeled datasets to discover hidden patterns or intrinsic structures within the data without human intervention."",
+  ""confidence"": ""high"",
+  ""key_points"": [
+    ""Supervised learning requires labeled data; unsupervised learning uses unlabeled data."",
+    ""Supervised learning focuses on prediction and classification; unsupervised learning focuses on pattern recognition and clustering."",
+    ""Common examples of supervised learning include regression and classification; for unsupervised, it includes clustering and association.""
+  ]
+}"
+Q3,v3,gemini-3.5-flash-lite,2026-10-30T17:20:43.847,2026-10-30T17:20:44.902,1.055,success,87,126,213,2.61e-05,0.000315,0.0003411,True,"{
+  ""answer"": ""The time complexity of binary search is O(log n) because the algorithm divides the search space in half with each iteration or recursive step, meaning the number of elements to search is halved at each step until the target is found or the space is exhausted."",
+  ""confidence"": ""high"",
+  ""key_points"": [
+    ""Time complexity is O(log n)"",
+    ""Algorithm divides the search space in half each step"",
+    ""Requires a sorted collection"",
+    ""Logarithmic growth means it scales very efficiently for large datasets""
+  ]
+}"
+Q4,v3,gemini-3.5-flash-lite,2026-10-30T17:20:44.902,2026-10-30T17:20:45.878,0.977,success,89,128,217,2.67e-05,0.00031999999999999997,0.00034669999999999997,True,"{
+  ""answer"": ""A primary key is a specific column or set of columns in a relational database table that uniquely identifies each record/row. Its main roles are to ensure data integrity by enforcing entity integrity (preventing duplicate rows) and to serve as the target for foreign keys to establish relationships between different tables."",
+  ""confidence"": ""high"",
+  ""key_points"": [
+    ""Uniquely identifies each record in a table"",
+    ""Ensures entity integrity by prohibiting null and duplicate values"",
+    ""Facilitates table relationships when referenced as a foreign key""
+  ]
+}"
+Q5,v3,gemini-3.5-flash-lite,2026-10-30T17:20:45.878,2026-10-30T17:20:47.152,1.274,success,86,201,287,2.58e-05,0.0005025,0.0005283,True,"{
+  ""answer"": ""Gradient descent is an iterative optimization algorithm used to find the minimum of a function. Imagine you are standing on a foggy mountain and want to walk down to the lowest valley. You would feel the slope of the ground beneath your feet and take a step in the direction that slopes downward most steeply. By repeating this process of sensing the slope and taking a step, you will eventually reach the bottom of the valley. In machine learning, the mountain represents the model's error, and the steps are adjustments to the model's parameters to minimize that error."",
+  ""confidence"": ""high"",
+  ""key_points"": [
+    ""Iterative optimization algorithm used to minimize a function."",
+    ""Analogy of walking down a foggy mountain to the lowest valley."",
+    ""Calculates the slope (gradient) to determine the direction of the steepest descent."",
+    ""Used in machine learning to adjust model parameters and reduce error.""
+  ]
+}"

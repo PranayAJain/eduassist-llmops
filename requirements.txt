@@ -1,0 +1,6 @@
+mlflow==3.3.2
+openai==3.41.0
+pandas==2.3.3
+sqlalchemy==2.0.36
+ipykernel==7.4.0
+nbconvert==7.17.2
