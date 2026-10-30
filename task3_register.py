@@ -10,4 +10,4 @@ MSG = {
 for v in ["v1", "v2", "v3"]:
     p = mlflow.genai.register_prompt(name=NAME, template=PROMPTS[v], commit_message=MSG[v],
                                      tags={"label": v, "app": "EduAssist"})
-    print(f"registered {NAME} version {p.version}  <- {v}")
+    print(NAME, "version", p.version, v)

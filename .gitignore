@@ -3,3 +3,4 @@ mlartifacts/
 __pycache__/
 *.log
 .ipynb_checkpoints/
+make_notebook.py

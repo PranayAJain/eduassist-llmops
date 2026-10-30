@@ -7802,7 +7802,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="EduAssist-AI---LLMOps:-API-Cost,-Latency-and-Prompt-Version-Management">EduAssist AI - LLMOps: API Cost, Latency and Prompt Version Management<a class="anchor-link" href="#EduAssist-AI---LLMOps:-API-Cost,-Latency-and-Prompt-Version-Management">¶</a></h1><p><strong>Course:</strong> AIMLCZG523 MLOps - Assignment 2  |  <strong>Student ID:</strong> 2025AE05025</p>
+<h1 id="EduAssist-AI---API-Cost,-Latency-and-Prompt-Version-Management">EduAssist AI - API Cost, Latency and Prompt Version Management<a class="anchor-link" href="#EduAssist-AI---API-Cost,-Latency-and-Prompt-Version-Management">¶</a></h1><p><strong>Course:</strong> AIMLCZG523 MLOps - Assignment 2  |  <strong>Student ID:</strong> 2025AE05025</p>
 <table>
 <thead>
 <tr>
@@ -7980,7 +7980,7 @@ def ask(qid, question, version, template):
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">RERUN</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"latency_tokens_cost.csv"</span><span class="p">):</span>
     <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">ask</span><span class="p">(</span><span class="n">qid</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="s2">"v3"</span><span class="p">,</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">"v3"</span><span class="p">])</span> <span class="k">for</span> <span class="n">qid</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">QUESTIONS</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"response"</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"latency_tokens_cost.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"response"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"latency_tokens_cost.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"task1_responses.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"latency_tokens_cost.csv"</span><span class="p">)</span>
 <span class="n">df1</span><span class="p">[[</span><span class="s2">"question_id"</span><span class="p">,</span><span class="s2">"prompt_version"</span><span class="p">,</span><span class="s2">"model"</span><span class="p">,</span><span class="s2">"start_time"</span><span class="p">,</span><span class="s2">"end_time"</span><span class="p">,</span><span class="s2">"latency_seconds"</span><span class="p">,</span><span class="s2">"status"</span><span class="p">]]</span>
@@ -8218,14 +8218,12 @@ Q5: Explain the concept of gradient descent in simple terms.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Interpretation.</strong> All 5 requests succeeded. Mean latency was 1.214 s (median 1.213 s) with a small spread
-(std 0.132 s, range 1.007-1.333 s). The slowest request was <strong>Q5</strong> ("Explain gradient descent in simple terms", 1.333 s).
-It also produced the most output tokens (171). An LLM generates its answer one token at a time, so longer, more
-explanatory answers take longer, and "explain in simple terms" invites a longer answer. Token count is not the
-whole story, though. Q3 generated only 115 tokens yet took 1.325 s, while Q1 generated 168 tokens in 1.213 s. With
-answers this short, network round-trip and server-side queueing on a shared, free-tier endpoint add jitter of about
-0.1-0.3 s, which is as large as the effect of answer length. With only 5 samples these figures are indicative; production
-monitoring should track p95/p99 latency over many requests.</p>
+<p><strong>Interpretation.</strong> All 5 requests succeeded. Mean latency was 1.214 s, median 1.213 s and std 0.132 s
+(range 1.007 to 1.333 s). Q5 (gradient descent) was the slowest at 1.333 s. It also had the longest answer, 171 output
+tokens, because the question asks for an explanation in simple terms and the model generates the answer token by token.
+Output length does not explain everything: Q3 had only 115 output tokens but took 1.325 s, while Q1 had 168 tokens and
+took 1.213 s. Network delay and load on the shared free-tier endpoint also add a few hundred milliseconds of variation.
+Five requests is a small sample, so these numbers are only indicative.</p>
 </div>
 </div>
 </div>
@@ -8265,69 +8263,69 @@ Total = Input + Output; Projected monthly cost = average cost per request x 10,0
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
 </style>
-<table id="T_776d7">
+<table id="T_0d13e">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" id="T_776d7_level0_col0">question_id</th>
-<th class="col_heading level0 col1" id="T_776d7_level0_col1">input_tokens</th>
-<th class="col_heading level0 col2" id="T_776d7_level0_col2">output_tokens</th>
-<th class="col_heading level0 col3" id="T_776d7_level0_col3">total_tokens</th>
-<th class="col_heading level0 col4" id="T_776d7_level0_col4">input_cost_usd</th>
-<th class="col_heading level0 col5" id="T_776d7_level0_col5">output_cost_usd</th>
-<th class="col_heading level0 col6" id="T_776d7_level0_col6">total_cost_usd</th>
+<th class="col_heading level0 col0" id="T_0d13e_level0_col0">question_id</th>
+<th class="col_heading level0 col1" id="T_0d13e_level0_col1">input_tokens</th>
+<th class="col_heading level0 col2" id="T_0d13e_level0_col2">output_tokens</th>
+<th class="col_heading level0 col3" id="T_0d13e_level0_col3">total_tokens</th>
+<th class="col_heading level0 col4" id="T_0d13e_level0_col4">input_cost_usd</th>
+<th class="col_heading level0 col5" id="T_0d13e_level0_col5">output_cost_usd</th>
+<th class="col_heading level0 col6" id="T_0d13e_level0_col6">total_cost_usd</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_776d7_level0_row0">0</th>
-<td class="data row0 col0" id="T_776d7_row0_col0">Q1</td>
-<td class="data row0 col1" id="T_776d7_row0_col1">89</td>
-<td class="data row0 col2" id="T_776d7_row0_col2">168</td>
-<td class="data row0 col3" id="T_776d7_row0_col3">257</td>
-<td class="data row0 col4" id="T_776d7_row0_col4">0.000027</td>
-<td class="data row0 col5" id="T_776d7_row0_col5">0.000420</td>
-<td class="data row0 col6" id="T_776d7_row0_col6">0.000447</td>
+<th class="row_heading level0 row0" id="T_0d13e_level0_row0">0</th>
+<td class="data row0 col0" id="T_0d13e_row0_col0">Q1</td>
+<td class="data row0 col1" id="T_0d13e_row0_col1">89</td>
+<td class="data row0 col2" id="T_0d13e_row0_col2">168</td>
+<td class="data row0 col3" id="T_0d13e_row0_col3">257</td>
+<td class="data row0 col4" id="T_0d13e_row0_col4">0.000027</td>
+<td class="data row0 col5" id="T_0d13e_row0_col5">0.000420</td>
+<td class="data row0 col6" id="T_0d13e_row0_col6">0.000447</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_776d7_level0_row1">1</th>
-<td class="data row1 col0" id="T_776d7_row1_col0">Q2</td>
-<td class="data row1 col1" id="T_776d7_row1_col1">85</td>
-<td class="data row1 col2" id="T_776d7_row1_col2">125</td>
-<td class="data row1 col3" id="T_776d7_row1_col3">210</td>
-<td class="data row1 col4" id="T_776d7_row1_col4">0.000025</td>
-<td class="data row1 col5" id="T_776d7_row1_col5">0.000313</td>
-<td class="data row1 col6" id="T_776d7_row1_col6">0.000338</td>
+<th class="row_heading level0 row1" id="T_0d13e_level0_row1">1</th>
+<td class="data row1 col0" id="T_0d13e_row1_col0">Q2</td>
+<td class="data row1 col1" id="T_0d13e_row1_col1">85</td>
+<td class="data row1 col2" id="T_0d13e_row1_col2">125</td>
+<td class="data row1 col3" id="T_0d13e_row1_col3">210</td>
+<td class="data row1 col4" id="T_0d13e_row1_col4">0.000025</td>
+<td class="data row1 col5" id="T_0d13e_row1_col5">0.000313</td>
+<td class="data row1 col6" id="T_0d13e_row1_col6">0.000338</td>
 </tr>
 <tr>
-<th class="row_heading level0 row2" id="T_776d7_level0_row2">2</th>
-<td class="data row2 col0" id="T_776d7_row2_col0">Q3</td>
-<td class="data row2 col1" id="T_776d7_row2_col1">87</td>
-<td class="data row2 col2" id="T_776d7_row2_col2">115</td>
-<td class="data row2 col3" id="T_776d7_row2_col3">202</td>
-<td class="data row2 col4" id="T_776d7_row2_col4">0.000026</td>
-<td class="data row2 col5" id="T_776d7_row2_col5">0.000287</td>
-<td class="data row2 col6" id="T_776d7_row2_col6">0.000314</td>
+<th class="row_heading level0 row2" id="T_0d13e_level0_row2">2</th>
+<td class="data row2 col0" id="T_0d13e_row2_col0">Q3</td>
+<td class="data row2 col1" id="T_0d13e_row2_col1">87</td>
+<td class="data row2 col2" id="T_0d13e_row2_col2">115</td>
+<td class="data row2 col3" id="T_0d13e_row2_col3">202</td>
+<td class="data row2 col4" id="T_0d13e_row2_col4">0.000026</td>
+<td class="data row2 col5" id="T_0d13e_row2_col5">0.000287</td>
+<td class="data row2 col6" id="T_0d13e_row2_col6">0.000314</td>
 </tr>
 <tr>
-<th class="row_heading level0 row3" id="T_776d7_level0_row3">3</th>
-<td class="data row3 col0" id="T_776d7_row3_col0">Q4</td>
-<td class="data row3 col1" id="T_776d7_row3_col1">89</td>
-<td class="data row3 col2" id="T_776d7_row3_col2">116</td>
-<td class="data row3 col3" id="T_776d7_row3_col3">205</td>
-<td class="data row3 col4" id="T_776d7_row3_col4">0.000027</td>
-<td class="data row3 col5" id="T_776d7_row3_col5">0.000290</td>
-<td class="data row3 col6" id="T_776d7_row3_col6">0.000317</td>
+<th class="row_heading level0 row3" id="T_0d13e_level0_row3">3</th>
+<td class="data row3 col0" id="T_0d13e_row3_col0">Q4</td>
+<td class="data row3 col1" id="T_0d13e_row3_col1">89</td>
+<td class="data row3 col2" id="T_0d13e_row3_col2">116</td>
+<td class="data row3 col3" id="T_0d13e_row3_col3">205</td>
+<td class="data row3 col4" id="T_0d13e_row3_col4">0.000027</td>
+<td class="data row3 col5" id="T_0d13e_row3_col5">0.000290</td>
+<td class="data row3 col6" id="T_0d13e_row3_col6">0.000317</td>
 </tr>
 <tr>
-<th class="row_heading level0 row4" id="T_776d7_level0_row4">4</th>
-<td class="data row4 col0" id="T_776d7_row4_col0">Q5</td>
-<td class="data row4 col1" id="T_776d7_row4_col1">86</td>
-<td class="data row4 col2" id="T_776d7_row4_col2">171</td>
-<td class="data row4 col3" id="T_776d7_row4_col3">257</td>
-<td class="data row4 col4" id="T_776d7_row4_col4">0.000026</td>
-<td class="data row4 col5" id="T_776d7_row4_col5">0.000427</td>
-<td class="data row4 col6" id="T_776d7_row4_col6">0.000453</td>
+<th class="row_heading level0 row4" id="T_0d13e_level0_row4">4</th>
+<td class="data row4 col0" id="T_0d13e_row4_col0">Q5</td>
+<td class="data row4 col1" id="T_0d13e_row4_col1">86</td>
+<td class="data row4 col2" id="T_0d13e_row4_col2">171</td>
+<td class="data row4 col3" id="T_0d13e_row4_col3">257</td>
+<td class="data row4 col4" id="T_0d13e_row4_col4">0.000026</td>
+<td class="data row4 col5" id="T_0d13e_row4_col5">0.000427</td>
+<td class="data row4 col6" id="T_0d13e_row4_col6">0.000453</td>
 </tr>
 </tbody>
 </table>
@@ -8375,13 +8373,11 @@ Share of cost from output tokens: 93.0%
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Cost-optimisation recommendation.</strong> Output tokens cause about 93% of the cost: they are 8.3x more expensive than
-input tokens, and the model writes more than it reads. The most effective lever is therefore to <strong>limit the answer
-length</strong>. Add a length rule to the production prompt, such as "answer in at most 80 words and give at most 3
-key_points", and set <code>max_tokens</code> to around 250 as a safety cap. Cutting the average output from about 139 to about 70
-tokens would lower cost per request by about 46%, and it would also reduce latency, because generation time grows with
-output length. Repeated questions (for example common course FAQs) could additionally be served from a response cache,
-which avoids an API call altogether.</p>
+<p><strong>Cost-optimisation recommendation.</strong> Output tokens make up about 93% of the cost: they are priced at USD 2.50
+per 1M against USD 0.30 for input, and the answers are longer than the prompts. The main saving is therefore shorter
+answers. Add a limit to the prompt (for example at most 80 words and 3 key points) and set <code>max_tokens</code> to about 250.
+If the average output drops from 139 to about 70 tokens, cost per request drops by about 46% and latency goes down too.
+Frequently repeated questions can also be cached so they do not need an API call.</p>
 </div>
 </div>
 </div>
@@ -8575,8 +8571,8 @@ Question: {{question}}
             <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
             <span class="n">mlflow</span><span class="o">.</span><span class="n">log_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">artifact_file</span><span class="o">=</span><span class="sa">f</span><span class="s2">"responses_</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">.json"</span><span class="p">)</span>
         <span class="n">summary</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"version"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">m</span><span class="p">})</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"prompt_evaluation_results.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">details</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"prompt_evaluation_details.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"prompt_evaluation_results.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">details</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"prompt_evaluation_details.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"using the 3 runs already logged in MLflow"</span><span class="p">)</span>
 
@@ -8909,18 +8905,17 @@ Question: {{question}}
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Promotion-justification">Promotion justification<a class="anchor-link" href="#Promotion-justification">¶</a></h3><p>Version 3 was promoted to <code>production</code> because it is the only version that meets the EduAssist product requirement
-and it is also the most efficient. The application expects a machine-readable JSON object with <code>answer</code>, <code>confidence</code>
-and <code>key_points</code>. v3 produced valid JSON for 5 of 5 questions (100%), while v1 and v2 returned free-form text
-and scored 0%, so their output would break the downstream parser no matter how good the content is.</p>
-<p>v3 is also the best on cost and latency. Its prompt is the longest (87.2 input tokens versus 22.2 for v1), but the
-fixed schema keeps the model's answers short: 149.4 output tokens on average versus 461.8 for v1 and 308.4 for v2.
-Output tokens are priced 8.3x higher than input tokens, so v3 costs USD 0.000400 per request, which is 66% cheaper
-than v1 (USD 0.001161) and 49% cheaper than v2 (USD 0.000785). At 10,000 requests a month that is about USD 4.00
-versus USD 11.61 for v1. Shorter generation also halves latency, from 2.18 s for v1 to 1.10 s.</p>
-<p>The trade-off is that v3's answers are more condensed than v2's explanatory text, and <code>confidence</code> is self-reported by
-the model. Using a registry alias means the application loads <code>prompts:/eduassist_prompt@production</code>, so a future
-v4 can be promoted, or v3 rolled back, by moving the alias without any code change.</p>
+<h3 id="Promotion-justification">Promotion justification<a class="anchor-link" href="#Promotion-justification">¶</a></h3><p>v3 is promoted to production. EduAssist needs a JSON response with <code>answer</code>, <code>confidence</code> and <code>key_points</code>. v3 returned
+valid JSON for all 5 questions (100%). v1 and v2 returned markdown text, so their valid_json rate is 0% and the
+application could not parse their output.</p>
+<p>v3 is also the cheapest and fastest version. Its prompt is longer (87.2 input tokens vs 22.2 for v1) because it includes
+the schema, but the schema keeps the answers short: 149.4 output tokens on average, compared to 461.8 for v1 and 308.4
+for v2. Output tokens cost 8.3 times more than input tokens, so v3 costs USD 0.000400 per request, which is 66% less than
+v1 (USD 0.001161) and 49% less than v2 (USD 0.000785). For 10,000 requests a month this is about USD 4.00 instead of
+USD 11.61 with v1. Average latency is 1.10 s, about half of v1 (2.18 s).</p>
+<p>The v3 answers are shorter and less detailed than the v2 answers, and the confidence value is the model's own estimate,
+so it should not be relied on too much. The application loads the prompt through the <code>production</code> alias, so a new version
+can be promoted, or v3 rolled back, by changing the alias only.</p>
 </div>
 </div>
 </div>
@@ -9025,9 +9020,9 @@ v4 can be promoted, or v3 rolled back, by moving the alias without any code chan
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p><code>gemini-3.5-flash-lite</code> answered the 5 academic questions in about 1.2 s each, at about USD 0.00037 per request
-(about USD 3.74 per month for 10,000 requests). Prompt versioning in MLflow showed that the prompt with the strict JSON
-schema (v3) is the most reliable, cheapest and fastest, and it now serves as the <code>production</code> alias.</p>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>gemini-3.5-flash-lite answered each question in about 1.2 s at about USD 0.00037 per request, or about USD 3.74 per month
+for 10,000 requests. Most of the cost comes from output tokens. Of the three prompts, v3 (strict JSON) gave valid output
+for every question and was also the cheapest and fastest, so it was promoted to production.</p>
 </div>
 </div>
 </div>

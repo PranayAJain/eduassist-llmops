@@ -25,6 +25,5 @@ for ver in [1, 2, 3]:
     summary.append({"version": label, **m})
     print(label, {k: round(v, 6) for k, v in m.items()})
 
-pd.DataFrame(summary).to_csv("prompt_evaluation_results.csv", index=False)
-pd.DataFrame(details).to_csv("prompt_evaluation_details.csv", index=False)
-print("\nsaved prompt_evaluation_results.csv")
+pd.DataFrame(summary).round(8).to_csv("prompt_evaluation_results.csv", index=False)
+pd.DataFrame(details).round(8).to_csv("prompt_evaluation_details.csv", index=False)
